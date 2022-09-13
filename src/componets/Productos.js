@@ -1,6 +1,7 @@
  
  import React from 'react'
  import TarjetaProducto from './TarjetaProducto'
+ import CarrousellProd from "./CarrousellProd.js"
  
  const classContainer = "bg-amber-200 w-full h-screen flex flex-col items-center justify-center"
 
@@ -21,11 +22,13 @@
 
  const Productos = () => {
   return (
+    <>
     <div className={classContainer}>
           <TarjetaProducto producto={producto[0]}/>
           <TarjetaProducto producto={producto[1]}/>
     </div>
-    
+    <CarrousellProd/>
+    </>
   )
  }
  
