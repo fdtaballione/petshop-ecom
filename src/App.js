@@ -1,16 +1,12 @@
-import Rutas from './componets/Rutas';
-import './output.css';
+import Rutas from "./componets/Rutas";
+import "./output.css";
 
 function App() {
   return (
     <>
-        <div className='container w-full'>
-        <Rutas/>
-        </div>
-
-        
-      
-      
+      <div className="container w-full">
+        <Rutas />
+      </div>
     </>
   );
 }
