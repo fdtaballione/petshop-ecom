@@ -1,56 +1,50 @@
+import { React } from "react";
 import { useContext } from "react";
-import { React, useState } from "react";
-import { CarritoContext } from "./CarritoContextProvider";
 import {
   TYPES,
-  nuevoProdACarrito,
   modificaProductoEnCarrito,
+  eliminaProductoEnCarrito,
 } from "./funcionesCarrito";
+import { CarritoContext } from "./CarritoContextProvider";
 
 const classContenedorTarjera =
   "w-full h-56 flex flex-row shadow-xl bg-white my-1 ";
 
 const classBotonMasMenos =
-  "bg-orange-800 rounded-full font-black w-8 h-8 hover:bg-orange-700 text-lg";
+  "bg-orange-800 rounded-full font-black  h-8 px-2 hover:bg-orange-700 text-lg";
 
 const classBotonMasMenosDisablesd =
-  "bg-orange-200 rounded-full font-black w-8 h-8 text-lg";
-const TarjetaProducto = (props) => {
-  const producto = props.producto;
-  const [cantidad, setCantidad] = useState(1);
-  const agregar = () => setCantidad(cantidad + 1);
-  const disminuir = () => setCantidad(cantidad - 1);
+  "bg-orange-200 rounded-full font-black h-8 px-2 text-lg";
 
+const ProductoEnCarrito = (props) => {
+  const producto = props.producto;
   const { dispatch, state } = useContext(CarritoContext);
 
-  const agregarACarrito = (id, cantidad) => {
+  const QuitarUnoDeCarrito = (id) => {
     let itemInCart = state.carrito.find((prod) => prod.id === id);
     try {
-      if (itemInCart) {
-        itemInCart.cantidad = itemInCart.cantidad + cantidad;
-        modificaProductoEnCarrito(itemInCart);
-        dispatch({
-          type: TYPES.UPDATE_ITEM,
-          payload: { id: id, newItem: itemInCart },
-        });
-      } else {
-        let newItem = state.productos.find((producto) => producto.id === id);
-        newItem = { ...newItem, cantidad: cantidad };
-        nuevoProdACarrito(newItem);
-        dispatch({
-          type: TYPES.ADD_TO_CARD,
-          payload: { newItem },
-        });
-      }
-      props.activarMensaje();
+      itemInCart.cantidad = itemInCart.cantidad - 1;
+      modificaProductoEnCarrito(itemInCart);
+      dispatch({
+        type: TYPES.UPDATE_ITEM,
+        payload: { id: id, newItem: itemInCart },
+      });
     } catch (e) {
       alert(e);
     }
   };
 
+  const QuitarTodosDeCarrito = (id) => {
+    eliminaProductoEnCarrito(id);
+    dispatch({
+      type: TYPES.REMOVE_ALL_PRODUCTS,
+      payload: { id: id },
+    });
+  };
+
   return (
     <>
-      <div className={classContenedorTarjera}>
+      <div className={classContenedorTarjera} key={producto.id}>
         <div className="w-40 w-full flex items-center justify-center">
           <img
             src={process.env.PUBLIC_URL + "/imagenes/" + producto.imagen}
@@ -70,31 +64,22 @@ const TarjetaProducto = (props) => {
             <div className="flex flex-row items-center justify-center sm:flex-col  ">
               <div className="flex flex-row mr-6 sm:mr-0 sm:mb-2 w-full justify-center content-center ">
                 <button
+                  onClick={() => QuitarUnoDeCarrito(producto.id)}
                   className={
-                    cantidad <= 1
+                    producto.cantidad <= 1
                       ? classBotonMasMenosDisablesd
                       : classBotonMasMenos
                   }
-                  onClick={() => disminuir()}
-                  disabled={cantidad <= 1}
+                  disabled={producto.cantidad <= 1}
                 >
-                  -
+                  - 1
                 </button>
-
-                <div className="px-3">{cantidad}</div>
+                <div className="px-3">{producto.cantidad}</div>
                 <button
                   className={classBotonMasMenos}
-                  onClick={() => agregar()}
+                  onClick={() => QuitarTodosDeCarrito(producto.id)}
                 >
-                  +
-                </button>
-              </div>
-              <div className=" flex w-full justify-center ">
-                <button
-                  className="shadow-xl border-2 border-orange-400 p-1 rounded bg-orange-500 hover:bg-orange-200"
-                  onClick={() => agregarACarrito(producto.id, cantidad)}
-                >
-                  Agregar a carrito
+                  Eliminar
                 </button>
               </div>
             </div>
@@ -105,4 +90,4 @@ const TarjetaProducto = (props) => {
   );
 };
 
-export default TarjetaProducto;
+export default ProductoEnCarrito;
