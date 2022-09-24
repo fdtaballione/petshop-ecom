@@ -14,7 +14,6 @@ const Rutas = () => {
   return (
     <Router>
       <CarritoContextProvider>
-        *
         <HeaderSite />
         <Routes>
           <Route path="/" element={<Inicio />} />

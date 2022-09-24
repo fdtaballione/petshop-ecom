@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { React, useState } from "react";
 import { CarritoContext } from "./CarritoContextProvider";
-import { TYPES } from "./funcionesCarrito";
+import {
+  TYPES,
+  nuevoProdACarrito,
+  modificaProductoEnCarrito,
+} from "./funcionesCarrito";
 
 const classContenedorTarjera =
   "w-full h-56 flex flex-row shadow-xl bg-white my-1 ";
@@ -17,12 +21,31 @@ const TarjetaProducto = (props) => {
   const agregar = () => setCantidad(cantidad + 1);
   const disminuir = () => setCantidad(cantidad - 1);
 
-  const { dispatch } = useContext(CarritoContext);
+  const { dispatch, state } = useContext(CarritoContext);
+
   const agregarACarrito = (id, cantidad) => {
-    dispatch({
-      type: TYPES.ADD_TO_CARD,
-      payload: { id: id, cantidad: cantidad },
-    });
+    let itemInCart = state.carrito.find((prod) => prod.id === id);
+    try {
+      if (itemInCart) {
+        itemInCart.cantidad = itemInCart.cantidad + cantidad;
+        modificaProductoEnCarrito(itemInCart);
+        dispatch({
+          type: TYPES.UPDATE_ITEM,
+          payload: { id: id, newItem: itemInCart },
+        });
+      } else {
+        let newItem = state.productos.find((producto) => producto.id === id);
+        newItem = { ...newItem, cantidad: cantidad };
+        nuevoProdACarrito(newItem);
+        dispatch({
+          type: TYPES.ADD_TO_CARD,
+          payload: { newItem },
+        });
+      }
+      props.activarMensaje();
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
@@ -52,14 +75,17 @@ const TarjetaProducto = (props) => {
                       ? classBotonMasMenosDisablesd
                       : classBotonMasMenos
                   }
-                  onClick={disminuir}
+                  onClick={() => disminuir()}
                   disabled={cantidad <= 1}
                 >
                   -
                 </button>
 
                 <div className="px-3">{cantidad}</div>
-                <button className={classBotonMasMenos} onClick={agregar}>
+                <button
+                  className={classBotonMasMenos}
+                  onClick={() => agregar()}
+                >
                   +
                 </button>
               </div>

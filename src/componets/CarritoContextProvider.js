@@ -4,7 +4,10 @@ import { carritoReducer } from "./funcionesCarrito";
 
 export const CarritoContext = createContext();
 
-const carritoEstadoInicial = [];
+const carritoEstadoInicial = {
+  productos: [],
+  carrito: [],
+};
 
 const CarritoContextProvider = (props) => {
   const [state, dispatch] = useReducer(carritoReducer, carritoEstadoInicial);

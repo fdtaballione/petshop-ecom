@@ -1,70 +1,88 @@
-export const productos = [
-  {
-    id: 1,
-    nombre: "Alimento Balanceado Vital Balance",
-    descripcion:
-      "Bolsa de 20 kg para razas medianas con alto contenido proteico",
-    precio: 7800,
-    imagen: "Prod01.jpg",
-  },
-  {
-    id: 2,
-    nombre: "Alimento Balanceado Royal Canin",
-    descripcion:
-      "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
-    precio: 4500,
-    imagen: "Prod02.jpg",
-  },
-  {
-    id: 3,
-    nombre: "Alimento Balanceado Excelent",
-    descripcion:
-      "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
-    precio: 4500,
-    imagen: "Prod03.jpg",
-  },
-];
+import axios from "axios";
+
+export const PROD_URL = "http://localhost:5000/productos",
+  CARRITO_URL = "http://localhost:5000/carrito";
 
 export const TYPES = {
+  READ_STATE: "READ_STATE",
   ADD_TO_CARD: "ADD_TO_CARD",
-  REMOVE_ONE_PRODUCT: "REMOVE_ONE_PRODUCT",
+  UPDATE_ITEM: "UPDATE_ITEM",
   REMOVE_ALL_PRODUCTS: "REMOVE_ALL_PRODUCTS",
   CLEAR_CART: "CLEAR CART",
 };
 
-export function carritoReducer(state, action) {
+export const carritoReducer = (state, action) => {
   switch (action.type) {
+    case TYPES.READ_STATE: {
+      return {
+        ...state,
+        productos: action.payload[0],
+        carrito: action.payload[1],
+      };
+    }
     case TYPES.ADD_TO_CARD: {
-      const { id, cantidad } = action.payload;
-      let newItem = productos.find((producto) => producto.id === id);
-      newItem = { ...newItem, cantidad: cantidad };
-
-      const itemInCart = state.find((prod) => prod.id === id);
-
-      return itemInCart
-        ? state.map((prod) =>
-            prod.id !== id
-              ? prod
-              : { ...prod, cantidad: prod.cantidad + cantidad }
-          )
-        : [...state, newItem];
+      const { newItem } = action.payload;
+      return { ...state, carrito: [...state.carrito, newItem] };
     }
 
-    case TYPES.REMOVE_ONE_PRODUCT: {
-      const { id } = action.payload;
-      const itemInCart = state.find((prod) => prod.id === id);
-
-      return state.map((prod) =>
-        prod.id !== id ? prod : { ...prod, cantidad: prod.cantidad - 1 }
-      );
+    case TYPES.UPDATE_ITEM: {
+      const { newItem } = action.payload;
+      return {
+        ...state,
+        carrito: state.carrito.map((prod) =>
+          prod.id === newItem.id ? newItem : prod
+        ),
+      };
     }
+
     case TYPES.REMOVE_ALL_PRODUCTS: {
       const { id } = action.payload;
-      return state.filter((prod) => prod.id !== id);
+      return {
+        ...state,
+        carrito: state.carrito.filter((prod) => prod.id !== id),
+      };
     }
     case TYPES.CLEAR_CART: {
+      return {
+        ...state,
+        carrito: [],
+      };
     }
     default:
       return state;
   }
-}
+};
+
+export const nuevoProdACarrito = async (item) => {
+  let options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(item),
+  };
+
+  let res = await axios(CARRITO_URL, options);
+  let prod = await res.data;
+  console.log(res);
+  console.log(prod);
+};
+
+export const modificaProductoEnCarrito = async (item) => {
+  let endPoint = CARRITO_URL + "/" + item.id;
+  let options = {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(item),
+  };
+  let res = await axios(endPoint, options);
+  //let prod = await res.data;
+};
+
+export const eliminaProductoEnCarrito = async (id) => {
+  let endPoint = CARRITO_URL + "/" + id;
+  let options = {
+    method: "DELETE",
+    headers: { "content-type": "application/json" },
+  };
+  let res = await axios(endPoint, options);
+  let prod = await res.data;
+};

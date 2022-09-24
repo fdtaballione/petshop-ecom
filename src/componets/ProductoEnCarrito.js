@@ -1,6 +1,10 @@
 import { React } from "react";
 import { useContext } from "react";
-import { TYPES } from "./funcionesCarrito";
+import {
+  TYPES,
+  modificaProductoEnCarrito,
+  eliminaProductoEnCarrito,
+} from "./funcionesCarrito";
 import { CarritoContext } from "./CarritoContextProvider";
 
 const classContenedorTarjera =
@@ -14,16 +18,24 @@ const classBotonMasMenosDisablesd =
 
 const ProductoEnCarrito = (props) => {
   const producto = props.producto;
-  const { dispatch } = useContext(CarritoContext);
+  const { dispatch, state } = useContext(CarritoContext);
 
   const QuitarUnoDeCarrito = (id) => {
-    dispatch({
-      type: TYPES.REMOVE_ONE_PRODUCT,
-      payload: { id: id },
-    });
+    let itemInCart = state.carrito.find((prod) => prod.id === id);
+    try {
+      itemInCart.cantidad = itemInCart.cantidad - 1;
+      modificaProductoEnCarrito(itemInCart);
+      dispatch({
+        type: TYPES.UPDATE_ITEM,
+        payload: { id: id, newItem: itemInCart },
+      });
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const QuitarTodosDeCarrito = (id) => {
+    eliminaProductoEnCarrito(id);
     dispatch({
       type: TYPES.REMOVE_ALL_PRODUCTS,
       payload: { id: id },
