@@ -22,5 +22,30 @@
       "imagen": "Prod03.jpg"
     }
   ],
-  "carrito": []
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Alimento Balanceado Royal Canin",
+      "descripcion": "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
+      "precio": 4900,
+      "imagen": "Prod02.jpg",
+      "cantidad": 14
+    },
+    {
+      "id": 3,
+      "nombre": "Alimento Balanceado Excelent",
+      "descripcion": "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
+      "precio": 4500,
+      "imagen": "Prod03.jpg",
+      "cantidad": 2
+    },
+    {
+      "id": 1,
+      "nombre": "Alimento Balanceado Vital Balance",
+      "descripcion": "Bolsa de 20 kg para razas medianas con alto contenido proteico",
+      "precio": 7800,
+      "imagen": "Prod01.jpg",
+      "cantidad": 1
+    }
+  ]
 }

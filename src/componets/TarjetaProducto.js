@@ -11,10 +11,10 @@ const classContenedorTarjera =
   "w-full h-56 flex flex-row shadow-xl bg-white my-1 ";
 
 const classBotonMasMenos =
-  "bg-orange-800 rounded-full font-black w-8 h-8 hover:bg-orange-700 text-lg";
+  "bg-amber-400 rounded-full font-black w-8 h-8 hover:bg-amber-200 text-lg";
 
 const classBotonMasMenosDisablesd =
-  "bg-orange-200 rounded-full font-black w-8 h-8 text-lg";
+  "bg-amber-100 rounded-full font-black w-8 h-8 text-lg";
 const TarjetaProducto = (props) => {
   const producto = props.producto;
   const [cantidad, setCantidad] = useState(1);
@@ -22,8 +22,17 @@ const TarjetaProducto = (props) => {
   const disminuir = () => setCantidad(cantidad - 1);
 
   const { dispatch, state } = useContext(CarritoContext);
+  const [msgAgregado, setMsgAgregado] = useState(false);
 
   const agregarACarrito = (id, cantidad) => {
+    const activarMensaje = () => {
+      setMsgAgregado(true);
+
+      setTimeout(() => {
+        setMsgAgregado(false);
+      }, 2000);
+    };
+
     let itemInCart = state.carrito.find((prod) => prod.id === id);
     try {
       if (itemInCart) {
@@ -42,7 +51,7 @@ const TarjetaProducto = (props) => {
           payload: { newItem },
         });
       }
-      props.activarMensaje();
+      activarMensaje();
     } catch (e) {
       alert(e);
     }
@@ -64,7 +73,18 @@ const TarjetaProducto = (props) => {
               {producto.nombre}
             </div>
             <p className="font-serif">{producto.descripcion}</p>
-            <div className="text-blue-600 font-bold">$ {producto.precio}</div>
+            <div className="flex w-full">
+              <div className="text-blue-600 font-bold">$ {producto.precio}</div>
+              <div>
+                {msgAgregado ? (
+                  <div className="px-5 pt-3 text-green-700">
+                    El producto fue agregado al carrito con éxito
+                  </div>
+                ) : (
+                  <div className="w-12"></div>
+                )}
+              </div>
+            </div>
           </div>
           <div className="w-full flex flex-col justify-center px-4  bg-white h-full w-full sm:w-2/6 ">
             <div className="flex flex-row items-center justify-center sm:flex-col  ">
