@@ -6,15 +6,23 @@ import Productos from "./Productos";
 import Servicios from "./Servicios";
 import Contacto from "./Contacto";
 import Inicio from "./Inicio";
-import HeaderSite from "./HeaderSite";
+
 import FooterSite from "./FooterSite";
+
+import Navbar from "./Navbar";
+
 import Carrito from "./Carrito";
+
 
 const Rutas = () => {
   return (
     <Router>
+
+       
+
       <CarritoContextProvider>
-        <HeaderSite />
+      <Navbar/>
+
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/Productos" element={<Productos />} />
