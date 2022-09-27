@@ -11,10 +11,10 @@ const classContenedorTarjera =
   "w-full h-56 flex flex-row shadow-xl bg-white my-1 ";
 
 const classBotonMasMenos =
-  "bg-orange-800 rounded-full font-black  h-8 px-2 hover:bg-orange-700 text-lg";
+  "bg-amber-400 rounded-full font-black  h-8 px-2 <hover:bg-orange-20></hover:bg-orange-20>0 text-lg";
 
 const classBotonMasMenosDisablesd =
-  "bg-orange-200 rounded-full font-black h-8 px-2 text-lg";
+  "bg-amber-100 rounded-full font-black h-8 px-2 text-lg";
 
 const ProductoEnCarrito = (props) => {
   const producto = props.producto;
