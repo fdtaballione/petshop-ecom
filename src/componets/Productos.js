@@ -1,9 +1,8 @@
 import { React, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios";
 import TarjetaProducto from "./TarjetaProducto";
-import { TYPES } from "./funcionesCarrito";
+import { updateState } from "./funcionesCarrito";
 import { CarritoContext } from "./CarritoContextProvider";
 import { useContext } from "react";
 
@@ -21,21 +20,8 @@ let verMensaje = false;
 const Productos = () => {
   const { state, dispatch } = useContext(CarritoContext);
 
-  const updateState = async () => {
-    const PROD_URL = "http://localhost:5000/productos",
-      CARRITO_URL = "http://localhost:5000/carrito";
-
-    const resProd = await axios.get(PROD_URL),
-      resCarr = await axios.get(CARRITO_URL);
-
-    const listaProd = await resProd.data,
-      listaCarrito = await resCarr.data;
-
-    dispatch({ type: TYPES.READ_STATE, payload: [listaProd, listaCarrito] });
-  };
-
   useEffect(() => {
-    updateState();
+    updateState(dispatch);
   }, []);
 
   return (

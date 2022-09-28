@@ -2,7 +2,12 @@ import { useContext, useState } from "react";
 import { React } from "react";
 import { CarritoContext } from "./CarritoContextProvider";
 import ProductoEnCarrito from "./ProductoEnCarrito";
-import { TYPES, eliminaProductoEnCarrito } from "./funcionesCarrito";
+import {
+  TYPES,
+  eliminaProductoEnCarrito,
+  actualizarCompra,
+  updateState,
+} from "./funcionesCarrito";
 import PagoCompra from "./PagoCompra";
 
 const classContainer = "bg-amber-200 w-full min-h-screen flex flex-col ";
@@ -19,6 +24,21 @@ const Carrito = () => {
 
   const abrirPago = () => {
     setEstadoModal(true);
+  };
+
+  const [msgPagado, setMsgPagado] = useState(false);
+
+  const confirmarPago = () => {
+    let compra = state.compra.find((ele) => ele.id === 1);
+
+    compra = { ...compra, numero: compra.numero + 1 };
+    vaciarCarrito();
+    actualizarCompra(compra);
+    setMsgPagado(true);
+
+    setTimeout(() => {
+      setMsgPagado(false);
+    }, 2000);
   };
 
   const vaciarCarrito = () => {
@@ -45,7 +65,7 @@ const Carrito = () => {
           <div className="flex">
             <div className="flex flex-col sm:flex-row w-full">
               <div className="text-yellow-800 my-2 mx-2 text-lg">
-                Nº Carrito: {state.compra.numero}
+                Nº Carrito: {state.compra[0].numero}
               </div>
               <div className="text-green-800 my-2 mx-2 text-lg">
                 Total de compra {sumarCompra()}
@@ -67,7 +87,12 @@ const Carrito = () => {
             <ProductoEnCarrito producto={prod} key={prod.id} />
           ))}
         </div>
-        <PagoCompra estadoModal={estadoModal} setEstadoModal={setEstadoModal} />
+        <PagoCompra
+          estadoModal={estadoModal}
+          setEstadoModal={setEstadoModal}
+          total={sumarCompra()}
+          confirmarPago={confirmarPago}
+        />
       </>
     );
   } else {
@@ -81,6 +106,15 @@ const Carrito = () => {
           >
             El carrito está vacío
           </button>
+          <div>
+            {msgPagado ? (
+              <div className="px-5  text-green-700">
+                El pago se realizó correctamente
+              </div>
+            ) : (
+              <div className="w-12"></div>
+            )}
+          </div>
         </div>
       </>
     );
