@@ -77,8 +77,8 @@ const TarjetaProducto = (props) => {
               <div className="text-blue-600 font-bold">$ {producto.precio}</div>
               <div>
                 {msgAgregado ? (
-                  <div className="px-5 pt-3 text-green-700">
-                    El producto fue agregado al carrito con éxito
+                  <div className="px-5  text-green-700">
+                    Producto agregado con éxito
                   </div>
                 ) : (
                   <div className="w-12"></div>

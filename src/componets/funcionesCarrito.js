@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const PROD_URL = "http://localhost:5000/productos",
-  CARRITO_URL = "http://localhost:5000/carrito";
+  CARRITO_URL = "http://localhost:5000/carrito",
+  COMPRA_URL = "http://localhost:5000/compra";
 
 export const TYPES = {
   READ_STATE: "READ_STATE",
@@ -9,6 +10,7 @@ export const TYPES = {
   UPDATE_ITEM: "UPDATE_ITEM",
   REMOVE_ALL_PRODUCTS: "REMOVE_ALL_PRODUCTS",
   CLEAR_CART: "CLEAR CART",
+  CONFIRM_PAY: "CONFIRM_PAY",
 };
 
 export const carritoReducer = (state, action) => {
@@ -18,6 +20,7 @@ export const carritoReducer = (state, action) => {
         ...state,
         productos: action.payload[0],
         carrito: action.payload[1],
+        compra: action.payload[2],
       };
     }
     case TYPES.ADD_TO_CARD: {
@@ -85,4 +88,34 @@ export const eliminaProductoEnCarrito = async (id) => {
   };
   let res = await axios(endPoint, options);
   let prod = await res.data;
+};
+
+export const actualizarCompra = async (item) => {
+  let endPoint = COMPRA_URL + "/" + item.id;
+  let options = {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(item),
+  };
+  let res = await axios(endPoint, options);
+  //let prod = await res.data;
+};
+
+export const updateState = async (dispatch) => {
+  const PROD_URL = "http://localhost:5000/productos",
+    CARRITO_URL = "http://localhost:5000/carrito",
+    COMPRA_URL = "http://localhost:5000/compra";
+
+  const resProd = await axios.get(PROD_URL),
+    resCarr = await axios.get(CARRITO_URL),
+    resCompra = await axios.get(COMPRA_URL);
+
+  const listaProd = await resProd.data,
+    listaCarrito = await resCarr.data,
+    listaCompra = await resCompra.data;
+
+  dispatch({
+    type: TYPES.READ_STATE,
+    payload: [listaProd, listaCarrito, listaCompra],
+  });
 };
