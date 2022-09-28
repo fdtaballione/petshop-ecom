@@ -7,6 +7,9 @@ export const CarritoContext = createContext();
 const carritoEstadoInicial = {
   productos: [],
   carrito: [],
+  compra: {
+    numero: 1,
+  },
 };
 
 const CarritoContextProvider = (props) => {

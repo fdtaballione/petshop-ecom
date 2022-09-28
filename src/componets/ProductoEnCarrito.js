@@ -58,7 +58,12 @@ const ProductoEnCarrito = (props) => {
               {producto.nombre}
             </div>
             <p className="font-serif">{producto.descripcion}</p>
-            <div className="text-blue-600 font-bold">$ {producto.precio}</div>
+            <div className="text-blue-600 font-bold">
+              $ {producto.precio} x {producto.cantidad} ={" "}
+              <span className="text-green-600">
+                $ {producto.precio * producto.cantidad}{" "}
+              </span>
+            </div>
           </div>
           <div className="w-full flex flex-col justify-center px-4  bg-white h-full w-full sm:w-2/6 ">
             <div className="flex flex-row items-center justify-center sm:flex-col  ">

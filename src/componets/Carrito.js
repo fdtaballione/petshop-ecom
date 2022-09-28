@@ -30,16 +30,39 @@ const Carrito = () => {
     });
   };
 
+  const sumarCompra = () => {
+    let suma = 0;
+    state.carrito.forEach((producto) => {
+      suma = suma + producto.cantidad * producto.precio;
+    });
+    return suma;
+  };
+
   if (state.carrito.length > 0) {
     return (
       <>
         <div className={classContainer}>
-          <button onClick={() => vaciarCarrito()} className={estiloNavButton}>
-            Vaciar el Carrito
-          </button>
-          <button onClick={() => abrirPago()} className={estiloNavButton}>
-            Pagar
-          </button>
+          <div className="flex">
+            <div className="flex flex-col sm:flex-row w-full">
+              <div className="text-yellow-800 my-2 mx-2 text-lg">
+                Nº Carrito: {state.compra.numero}
+              </div>
+              <div className="text-green-800 my-2 mx-2 text-lg">
+                Total de compra {sumarCompra()}
+              </div>
+            </div>
+            <div className="flex flex-col justify-between w-full sm:flex-row sm:justify-start">
+              <button
+                onClick={() => vaciarCarrito()}
+                className={estiloNavButton}
+              >
+                Vaciar el Carrito
+              </button>
+              <button onClick={() => abrirPago()} className={estiloNavButton}>
+                Pagar
+              </button>
+            </div>
+          </div>
           {state.carrito.map((prod) => (
             <ProductoEnCarrito producto={prod} key={prod.id} />
           ))}
