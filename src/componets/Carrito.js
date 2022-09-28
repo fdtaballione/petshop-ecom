@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { React } from "react";
 import { CarritoContext } from "./CarritoContextProvider";
 import ProductoEnCarrito from "./ProductoEnCarrito";
 import { TYPES, eliminaProductoEnCarrito } from "./funcionesCarrito";
+import PagoCompra from "./PagoCompra";
 
 const classContainer = "bg-amber-200 w-full min-h-screen flex flex-col ";
 
@@ -13,6 +14,12 @@ const estiloNavButton =
 
 const Carrito = () => {
   const { state, dispatch } = useContext(CarritoContext);
+
+  const [estadoModal, setEstadoModal] = useState(false);
+
+  const abrirPago = () => {
+    setEstadoModal(true);
+  };
 
   const vaciarCarrito = () => {
     state.carrito.forEach((prod) => {
@@ -30,10 +37,14 @@ const Carrito = () => {
           <button onClick={() => vaciarCarrito()} className={estiloNavButton}>
             Vaciar el Carrito
           </button>
+          <button onClick={() => abrirPago()} className={estiloNavButton}>
+            Pagar
+          </button>
           {state.carrito.map((prod) => (
             <ProductoEnCarrito producto={prod} key={prod.id} />
           ))}
         </div>
+        <PagoCompra estadoModal={estadoModal} setEstadoModal={setEstadoModal} />
       </>
     );
   } else {
