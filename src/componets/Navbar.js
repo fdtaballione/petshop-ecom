@@ -80,7 +80,7 @@ function Navbar() {
                       <a href="/">
                     <img className="rounded-full w-14" src={usuario} alt="usuario"  />
                       </a>
-                      <a href="/">
+                      <a href="/Carrito">
                     <img className="rounded-full w-8" src={carrito} alt="carrito" />
                       </a>
                     </div>
