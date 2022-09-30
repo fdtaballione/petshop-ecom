@@ -1,6 +1,13 @@
 import React, { useRef } from "react";
-
-//const classContainer = "bg-amber-400 w-full h-screen flex items-center justify-center"
+import Marca1 from "./../imagenes/marcas1.png";
+import Marca2 from "./../imagenes/marcas2.png";
+import Marca3 from "./../imagenes/marcas3.png";
+import Marca4 from "./../imagenes/marcas4.png";
+import Marca5 from "./../imagenes/marcas5.png";
+import Marca6 from "./../imagenes/marcas6.png";
+import Marca7 from "./../imagenes/marcas7.png";
+import Marca8 from "./../imagenes/marcas8.png";
+import Marca9 from "./../imagenes/marcas9.png";
 
 const CarrousellProd = () => {
   const slider = useRef();
@@ -32,18 +39,60 @@ const CarrousellProd = () => {
         </button>
         <div
           ref={slider}
-          className="snap-x overflow-x-auto scroll-smooth h-full flex items-center justify-start"
+          className="snap-x overflow-x-auto scroll-smooth  flex items-center justify-start"
         >
-          {images.map((e, i) => (
-            <div key={i} className="snap-start flex flex-shrink-0 w-auto mx-4">
-              <img
-                src={`https://picsum.photos/id/${i}/300/300`}
-                alt={`images${i}`}
-                className="object-cover object-center w-full"
-              />
-            </div>
-          ))}
+          <div
+            className="marcasLogos"
+            class="snap-start flex flex-shrink-0 w-auto h-56 mx-4 "
+          >
+            <img
+              src={Marca1}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca2}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca3}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca4}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca5}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca6}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca7}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca8}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+            <img
+              src={Marca9}
+              alt=""
+              class="object-cover object-center w-full"
+            />
+          </div>
         </div>
+
         <button
           className="bg-gray-500 mx-2"
           onClick={() => (slider.current.scrollLeft += 200)}
