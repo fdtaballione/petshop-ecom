@@ -14,7 +14,7 @@ const Slidera = () => {
   };
 
   return (
-    <div className="container">
+    <div id="slider" className="container">
       <Slider {...settings}>
         <div className="slick-list">
           <a href="Productos.js">

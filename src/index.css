@@ -13,13 +13,27 @@ code {
 }
 
 .Slideshow {
-  color: blue;
-  margin-top: -300px;
+  margin-top: -600px;
+  position: absolute;
+}
+
+.marcasLogos {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  width: 100px;
+  justify-content: space-between;
+}
+
+.Carousel {
+  margin-top: 450px;
+  height: 0px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .slick-list {
-  position: relative;
-  display: block;
+  position: fixed;
   height: 300px;
   width: 100%;
   text-align: center;
