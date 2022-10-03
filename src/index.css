@@ -13,8 +13,18 @@ code {
 }
 
 .Slideshow {
-  margin-top: -600px;
+  margin-top: -400px;
   position: absolute;
+}
+
+.slick-list {
+  width: 100%;
+  text-align: center;
+}
+
+.Carousel {
+  margin-top: 400px;
+  width: 90%;
 }
 
 .marcasLogos {
@@ -25,16 +35,32 @@ code {
   justify-content: space-between;
 }
 
-.Carousel {
-  margin-top: 450px;
-  height: 0px;
-  width: 100%;
-  flex-wrap: wrap;
+@media screen and (max-width: 768px) {
+  .Slideshow {
+    width: 80%;
+    height: auto;
+    margin-top: -500px;
+    position: absolute;
+  }
+  .Carousel {
+    width: 100%;
+    margin-bottom: 100px;
+    margin-right: 10px;
+    margin-left: -100px;
+  }
 }
-
-.slick-list {
-  position: fixed;
-  height: 300px;
-  width: 100%;
-  text-align: center;
+@media screen and (max-width: 480px) {
+  .Slideshow {
+    width: 80%;
+    height: auto;
+    margin-top: -600px;
+    position: absolute;
+  }
+  .Carousel {
+    width: 150%;
+    height: auto;
+    margin-top: 0px;
+    position: absolute;
+    margin-left: 40px;
+  }
 }
