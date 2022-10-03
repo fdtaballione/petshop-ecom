@@ -1,12 +1,14 @@
 import React from "react";
-import { Button, Modal, Label, TextInput, Checkbox } from "flowbite-react";
-import { useState } from "react";
+import { Button, Modal, Label, TextInput } from "flowbite-react";
 
 const PagoCompra = (props) => {
-  const [estadoModal, setEstadoModal] = useState(false);
-
   const onClose = () => {
     props.setEstadoModal(false);
+  };
+
+  const onConfirm = (e) => {
+    e.preventDefault();
+    props.confirmarPago();
   };
 
   return (
@@ -20,7 +22,7 @@ const PagoCompra = (props) => {
         >
           <Modal.Header />
           <Modal.Body>
-            <form onSubmit={() => props.confirmarPago()}>
+            <form onSubmit={onConfirm}>
               <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Pago de la compra

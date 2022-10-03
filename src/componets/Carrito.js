@@ -6,7 +6,6 @@ import {
   TYPES,
   eliminaProductoEnCarrito,
   actualizarCompra,
-  updateState,
 } from "./funcionesCarrito";
 import PagoCompra from "./PagoCompra";
 
@@ -28,17 +27,18 @@ const Carrito = () => {
 
   const [msgPagado, setMsgPagado] = useState(false);
 
-  const confirmarPago = () => {
+  const confirmarPago = (e) => {
     let compra = state.compra.find((ele) => ele.id === 1);
 
     compra = { ...compra, numero: compra.numero + 1 };
     vaciarCarrito();
     actualizarCompra(compra);
     setMsgPagado(true);
-
+    setEstadoModal(false);
     setTimeout(() => {
       setMsgPagado(false);
-    }, 2000);
+      window.location = "/Productos";
+    }, 3000);
   };
 
   const vaciarCarrito = () => {
