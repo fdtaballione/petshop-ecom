@@ -7,7 +7,7 @@ import { CarritoContext } from "./CarritoContextProvider";
 import { useContext } from "react";
 
 const classContainer =
-  "bg-amber-200 w-full h-screen flex flex-col items-center justify-center";
+  "bg-amber-200 w-full flex flex-col items-center justify-center";
 
 const estiloNavButton =
   " bg-yellow-500 hover:bg-yellow-100 " +

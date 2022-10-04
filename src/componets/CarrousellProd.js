@@ -41,54 +41,51 @@ const CarrousellProd = () => {
           ref={slider}
           className="snap-x overflow-x-auto scroll-smooth  flex items-center justify-start"
         >
-          <div
-            className="marcasLogos"
-            class="snap-start flex flex-shrink-0 w-auto h-56 mx-4 "
-          >
+          <div className="marcasLogos snap-start flex flex-shrink-0 w-auto h-56 mx-4 ">
             <img
               src={Marca1}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca2}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca3}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca4}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca5}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca6}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca7}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca8}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
             <img
               src={Marca9}
               alt=""
-              class="object-cover object-center w-full"
+              className="object-cover object-center w-full"
             />
           </div>
         </div>

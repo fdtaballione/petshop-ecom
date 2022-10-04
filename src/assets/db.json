@@ -4,22 +4,43 @@
       "id": 1,
       "nombre": "Alimento Balanceado Vital Balance",
       "descripcion": "Bolsa de 20 kg para razas medianas con alto contenido proteico",
-      "precio": 7800,
+      "precio": 9800,
       "imagen": "Prod01.jpg"
     },
     {
       "id": 2,
       "nombre": "Alimento Balanceado Royal Canin",
       "descripcion": "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
-      "precio": 4900,
+      "precio": 12500,
       "imagen": "Prod02.jpg"
     },
     {
       "id": 3,
       "nombre": "Alimento Balanceado Excelent",
       "descripcion": "Bolsa de 10 kg para razas Pequeñas con alto contenido proteico",
-      "precio": 4500,
+      "precio": 10500,
       "imagen": "Prod03.jpg"
+    },
+    {
+      "id": 4,
+      "nombre": "Alimento Royal Canin Mini",
+      "descripcion": "Bolsa de 2 kg para razas Pequeñas",
+      "precio": 2500,
+      "imagen": "Prod04.jpg"
+    },
+    {
+      "id": 5,
+      "nombre": "Alimento Performance Adult",
+      "descripcion": "Cuidado Renal 10 kg",
+      "precio": 9500,
+      "imagen": "Prod05.jpg"
+    },
+    {
+      "id": 6,
+      "nombre": "Royal Canin Maxi Adult",
+      "descripcion": "Bolsa de 3 kg. Adultos. Dieta balanceada ",
+      "precio": 3500,
+      "imagen": "Prod06.jpg"
     }
   ],
   "carrito": [
