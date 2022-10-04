@@ -18,7 +18,6 @@ function Navbar() {
 
   return (
     <div>
-
       <div className="bg-gradient-to-r from-blue-900 to to-blue-200 text-center font-bold italic">
         Envios gratis en compras mayores a $4000
       </div>
@@ -63,29 +62,56 @@ function Navbar() {
                   >
                     Contacto
                   </NavLink>
-                  
+
                   <div className="hidden md:flex md:w-2/3 w-auto mb-2 justify-items-end">
                     <div className="flex border-2 border-orange-300 rounded-xl ">
-                    <form className="flex" action="?aaa=bbb" method="POST">
-                      <input
-                      className="rounded-lg"
-                        type="text"
-                        placeholder="Buscar"
-                      ></input>
+                      <form className="flex" action="?aaa=bbb" method="POST">
+                        <input
+                          className="rounded-lg"
+                          type="text"
+                          placeholder="Buscar"
+                        ></input>
 
-                      <button type="submit"><img className="rounded-lg" src={lupa} alt="buscar" width="20" /></button>
-                    </form>
+                        <button type="submit">
+                          <img
+                            className="rounded-lg"
+                            src={lupa}
+                            alt="buscar"
+                            width="20"
+                          />
+                        </button>
+                      </form>
                     </div>
                     <div className="flex mx-2">
-                      <a href="/">
-                    <img className="rounded-full w-14" src={usuario} alt="usuario"  />
-                      </a>
-                      <a href="/Carrito">
-                    <img className="rounded-full w-8" src={carrito} alt="carrito" />
-                      </a>
+                      <NavLink
+                        to="/Carrito"
+                        className={({ isActive }) =>
+                          estiloNavButton +
+                          (isActive ? "navbar-option-active" : "")
+                        }
+                      >
+                        <img
+                          className="rounded-full w-8"
+                          src={carrito}
+                          alt="carrito"
+                        />
+                      </NavLink>
+
+                      <NavLink
+                        to="/Contacto"
+                        className={({ isActive }) =>
+                          estiloNavButton +
+                          (isActive ? "navbar-option-active" : "")
+                        }
+                      >
+                        <img
+                          className="rounded-full w-16"
+                          src={usuario}
+                          alt="usuario"
+                        />
+                      </NavLink>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -175,16 +201,11 @@ function Navbar() {
                 >
                   Contacto
                 </a>
-
-                
               </div>
             </div>
           )}
         </Transition>
       </nav>
-
-      
-      
     </div>
   );
 }
